@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>AuthDev</h1>
+<h3>註冊</h3>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label>{{ form.username.label }}</label>
+            {{ form.username }}
+        </div>
+        <div class="form-group col-md-4">
+            <label>{{ form.email.label }}</label>
+            {{ form.email }}
+        </div>
+        <div class="form-group col-md-6">
+            <label>{{ form.password1.label }}</label>
+            {{ form.password1 }}
+        </div>
+        <div class="form-group col-md-4">
+            <label>{{ form.password2.label }}</label>
+            {{ form.password2 }}
+        </div>
+    <br />
+    <input class="btn btn-success" type="submit" value="save" />
+</form>
+
+{% endblock  %}
