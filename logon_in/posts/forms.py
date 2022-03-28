@@ -32,3 +32,4 @@ class LoginForm(forms.Form):
         label="密碼",
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
+    
