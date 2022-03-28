@@ -16,7 +16,7 @@ def sign_up(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            redirect('/login')  #重新導向到登入畫面
+            return redirect('/login')  #重新導向到登入畫面
     context = {
         'form': form
     }
