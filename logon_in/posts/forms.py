@@ -1,6 +1,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+#-------------upload---------------------
+from binascii import a2b_qp
+from datetime import datetime
+from email.policy import default
+
+from posts.models import Upload_Image
+from django.utils import timezone
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(
@@ -32,4 +39,9 @@ class LoginForm(forms.Form):
         label="密碼",
         widget=forms.PasswordInput(attrs={'class': 'form-control'})
     )
-    
+
+
+class Upload_Image_Form(forms.ModelForm):
+    class Meta:
+        model = Upload_Image
+        fields = ['image','date']

@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from posts.views import index,sign_up,sign_in,log_out
+from posts.views import *
+#--------------------------upload--------------------------------
+from django.conf import settings
+from django.conf.urls.static import static
+import django
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,5 +27,8 @@ urlpatterns = [
     path('index/',index,name='Index'),
     path('register/',sign_up,name='Register'),
     path('login/',sign_in,name='Login'),
-    path('logout', log_out, name='Logout')
-]
+    path('logout', log_out, name='Logout'),
+    path('upload/',upload,name='Loadup'),
+    path('upload/success/',success),
+    path('listall/',list_all)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

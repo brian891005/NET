@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
-from posts.forms import RegisterForm
-from posts.forms import LoginForm
+from posts.forms import *
 from django.contrib.auth import authenticate, login, logout
 
 
@@ -41,3 +40,27 @@ def sign_in(request):
 def log_out(request):
     logout(request)
     return redirect('/login') #重新導向到登入畫面
+
+
+def upload(request):
+  
+    if request.method == 'POST':
+        form = Upload_Image_Form(request.POST, request.FILES)
+  
+        if form.is_valid():
+            form.save()
+            return redirect('/upload/success/')
+    else:
+        form = Upload_Image_Form()
+    return render(request, 'upload.html', {'form' : form})
+  
+  
+def success(request):
+    return HttpResponse('successfully uploaded')
+
+def list_all(request):
+    images = Upload_Image.objects.all().order_by('id')
+    context = {
+        'images':images
+    }
+    return render(request,'listall.html',context)
