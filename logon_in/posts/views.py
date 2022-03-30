@@ -3,9 +3,12 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from posts.forms import *
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+@login_required(login_url='/login')
+
 def index(request):
     return render(request, 'index.html')
 
@@ -41,7 +44,7 @@ def log_out(request):
     logout(request)
     return redirect('/login') #重新導向到登入畫面
 
-
+@login_required(login_url='/login')
 def upload(request):
   
     if request.method == 'POST':
@@ -54,10 +57,11 @@ def upload(request):
         form = Upload_Image_Form()
     return render(request, 'upload.html', {'form' : form})
   
-  
+@login_required(login_url='/login')
 def success(request):
     return HttpResponse('successfully uploaded')
 
+@login_required(login_url='/login')
 def list_all(request):
     images = Upload_Image.objects.all().order_by('id')
     context = {
