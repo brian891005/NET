@@ -44,4 +44,4 @@ class LoginForm(forms.Form):
 class Upload_Image_Form(forms.ModelForm):
     class Meta:
         model = Upload_Image
-        fields = ['image','date']
+        fields = ['user_name','image','date']
